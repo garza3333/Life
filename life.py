@@ -63,7 +63,7 @@ class Controller:
                 for j in range(len(matriz[0])):
                     matriz[i][j] = int(matriz[i][j])
            #self.printMat(matriz)
-            print("-----------------section------------------")
+           # print("-----------------section------------------")
             return matriz
 
     ##Funcion para guardar la información de la matriz en un archivo csv
@@ -262,7 +262,15 @@ hecho = False
 reloj = pygame.time.Clock()
  
 # -------- Bucle Principal del Programa-----------
+
+# Fuente del texto + label
+myfont = pygame.font.SysFont("monospace", 15)
+
+#Color de las casillas
 cont = 0
+#variable de tiempo luego debe ser cambiada por el input
+global timeVar
+timeVar = 0
 
 # Imagenes
 save1 = pygame.image.load("images/save3.png")
@@ -339,6 +347,8 @@ while not hecho:
     buttonNext.update(window,cursor1)
     buttonPrevious.update(window,cursor1)
     buttonReload.update(window,cursor1)
+    label = myfont.render("  Time: " +  str(timeVar), 1, (255,255,0))
+    window.blit(label, (655, 20))
 
  
     # Establecemos el fondo de pantalla.
