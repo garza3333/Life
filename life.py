@@ -15,139 +15,148 @@ import csv
 ## 1 casa
 ## 2 Agua
 ## 3 Luz
+
+## Matriz de prueba
 matriz = [[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #0
-                  [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #1
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #2
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #3
-                  [0,0,0,0,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0],   #4
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #5
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #6
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #7
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #8
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #9
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #10
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #11
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #12
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #13
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #14
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #15
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #16
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #17
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #18
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #19
-                  [0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],   #20
-                  [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #21
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #22
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #23
-                  [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #24
+          [1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #1
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #2
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #3
+          [0,0,0,0,0,0,0,0,2,0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0],   #4
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #5
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #6
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #7
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #8
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #9
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #10
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #11
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #12
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #13
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #14
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #15
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #16
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #17
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #18
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #19
+          [0,0,0,0,0,1,3,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],   #20
+          [0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #21
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #22
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #23
+          [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],   #24
           ]
 
 
-##Funcion para leer la matriz desde el archivo csv
-def init():
+##Clase que controla la lógica de la matriz
+class Controller:
+    def __init__(self):
+        self.name = "controler"
+    ##Funcion para leer la matriz desde el archivo csv
+    def init(self):
+        
+        matriz = []
+        with open('matriz.csv') as File:
+            reader = csv.reader(File, delimiter=',', quotechar=',',
+                                quoting=csv.QUOTE_MINIMAL)
+            for row in reader:
+                if len(row) != 0:
+                    matriz += [row]
+            for i in range(len(matriz)):
+                for j in range(len(matriz[0])):
+                    matriz[i][j] = int(matriz[i][j])
+            self.printMat(matriz)
+            print("-----------------section------------------")
+            return matriz
+
+    ##Funcion para guardar la información de la matriz en un archivo csv
+    def saveToDisk(self,data):
+
+         with open('matriz.csv', 'w') as f:
+            writer = csv.writer(f)
+            for row in data:
+                writer.writerow(row)
+            f.close()
+  
+    ##Funcion para la creacion de matrices cuadradas
+    def makeMat(self,num):
+        matriz = []
+        for i in range(num):
+            row = []
+            for j in range(num):
+                row += [0]
+            matriz += [row]
+        self.printMat(matriz)
+        return matriz
+
+    ##Funcion para imprimir una matriz en consola
+    def printMat(self,mat):
+        for i in mat:
+            print(i)
+
+
+    ##Obtiene los valores de todas las casillas adyacentes
+    ## a un punto de la matriz y los inserta en una lista
+    def check(self,m,x,y):
+        lista = []
+        if not x-1 <0:
+            lista += [m[x-1][y]]
+        if not x+1 > len(m)-1:
+            lista += [m[x+1][y]]
+        if not y-1 < 0 :
+            lista += [m[x][y-1]]
+        if not y+1 > len(m)-1:
+            lista += [m[x][y+1]]
+        if not x-1 < 0 and not y-1 < 0 :
+            lista += [m[x-1][y-1]]
+        if not x-1 < 0 and not y+1 > len(m)-1:
+            lista += [m[x-1][y+1]]
+        if not x+1 > len(m)-1 and not y-1 <0:
+            lista += [m[x+1][y-1]]
+        if not x+1 > len(m)-1 and not y+1 > len(m)-1:
+            lista += [m[x+1][y+1]]
+        return lista
     
-    matriz = []
-    with open('matriz.csv') as File:
-        reader = csv.reader(File, delimiter=',', quotechar=',',
-                            quoting=csv.QUOTE_MINIMAL)
-        for row in reader:
-            if len(row) != 0:
-                matriz += [row]
+
+    ##Obtiene la cantidad de veces que un numero
+    ##se repite en una lista
+    def getNum(self,num,llist):
+        cont = 0
+        for i in llist:
+            if i == num:
+                cont+=1
+        return cont
+
+    ##Funcion que comprueba si una condicion se cumple
+    ##para intercambiar el valor de la casilla de la matriz
+    def transform(self,m,lista,x,y):
+        if m[x][y] == 0:
+            if self.getNum(2,lista) >= 1:
+                m[x][y] = 1
+            elif  self.getNum(1,lista) >= 2 and self.getNum(3,lista) >= 1:
+                m[x][y] = 2
+            elif  self.getNum(1,lista)>= 3 or self.getNum(2,lista)>=3 or self.getNum(3,lista)>=3:
+                m[x][y] = 3
+
+        #if m[x][y] == 0:
+           # if getNum(1,lista)>= 3 or getNum(2,lista)>=3 or getNum(3,lista)>=3:
+              #  m[x][y] = 3
+
+        elif m[x][y] == 2:
+            if self.getNum(1,lista) >= 6:
+                m[x][y] = 0
+        elif m[x][y] == 1:
+            if self.getNum(2,lista) == 0 or self.getNum(3,lista) == 0:
+                m[x][y] = 0
+        #if m[x][y] == 0:
+          #  if getNum(1,lista) >= 2 and getNum(3,lista) >= 1:
+            #    m[x][y] = 3
+        return m
+
+
+    def turn(self,matriz):
         for i in range(len(matriz)):
             for j in range(len(matriz[0])):
-                matriz[i][j] = int(matriz[i][j])
-        printMat(matriz)
-        print("-----------------section------------------")
-
-##Funcion para guardar la información de la matriz en un archivo csv
-def saveToDisk(data):
-
-     with open('matriz.csv', 'w') as f:
-        writer = csv.writer(f)
-        for row in data:
-            writer.writerow(row)
-        f.close()
-  
-##Funcion para la creacion de matrices cuadradas
-def makeMat(num):
-    matriz = []
-    for i in range(num):
-        row = []
-        for j in range(num):
-            row += [0]
-        matriz += [row]
-    printMat(matriz)
-
-##Funcion para imprimir una matriz en consola
-def printMat(mat):
-    for i in mat:
-        print(i)
-
-
-##Obtiene los valores de todas las casillas adyacentes
-## a un punto de la matriz y los inserta en una lista
-def check(m,x,y):
-    lista = []
-    if not x-1 <0:
-        lista += [m[x-1][y]]
-    if not x+1 > len(m)-1:
-        lista += [m[x+1][y]]
-    if not y-1 < 0 :
-        lista += [m[x][y-1]]
-    if not y+1 > len(m)-1:
-        lista += [m[x][y+1]]
-    if not x-1 < 0 and not y-1 < 0 :
-        lista += [m[x-1][y-1]]
-    if not x-1 < 0 and not y+1 > len(m)-1:
-        lista += [m[x-1][y+1]]
-    if not x+1 > len(m)-1 and not y-1 <0:
-        lista += [m[x+1][y-1]]
-    if not x+1 > len(m)-1 and not y+1 > len(m)-1:
-        lista += [m[x+1][y+1]]
-    return lista
-    
-
-##Obtiene la cantidad de veces que un numero
-##se repite en una lista
-def getNum(num,llist):
-    cont = 0
-    for i in llist:
-        if i == num:
-            cont+=1
-    return cont
-
-##Funcion que comprueba si una condicion se cumple
-##para intercambiar el valor de la casilla de la matriz
-def transform(m,lista,x,y):
-    if m[x][y] == 0:
-        if getNum(2,lista) >= 1:
-            m[x][y] = 1
-        elif  getNum(1,lista)>= 3 or getNum(2,lista)>=3 or getNum(3,lista)>=3:
-            m[x][y] = 3
-        elif  getNum(1,lista) >= 2 and getNum(3,lista) >= 1:
-            m[x][y] = 3
-    #if m[x][y] == 0:
-       # if getNum(1,lista)>= 3 or getNum(2,lista)>=3 or getNum(3,lista)>=3:
-          #  m[x][y] = 3
-
-    elif m[x][y] == 2:
-        if getNum(1,lista) >= 6:
-            m[x][y] = 0
-    elif m[x][y] == 1:
-        if getNum(2,lista) == 0 or getNum(3,lista) == 0:
-            m[x][y] = 0
-    #if m[x][y] == 0:
-      #  if getNum(1,lista) >= 2 and getNum(3,lista) >= 1:
-        #    m[x][y] = 3
-    return m
-
-
-def turn(matriz):
-    for i in range(len(matriz)):
-        for j in range(len(matriz[0])):
-            lista = check(matriz,i,j)
-            matriz = transform(matriz,lista,i,j)
-    return matriz
+                lista = self.check(matriz,i,j)
+                matriz = self.transform(matriz,lista,i,j)
+        return matriz
 
 
 
@@ -157,10 +166,14 @@ def turn(matriz):
 #lista = [0,1,2,3,1,2,0,1,2,0,0,1,2,3]
 #print(getNum(1,lista))
 #turn(matriz)
-saveToDisk(turn(matriz))
-init()
-saveToDisk(turn(matriz))
-init()
+
+controller = Controller()
+controller.saveToDisk(controller.turn(matriz))
+controller.init()
+controller.saveToDisk(controller.turn(matriz))
+controller.init()
+controller.saveToDisk(controller.turn(matriz))
+controller.init()
 
 
 ##Ejemplo movimiento de un cubo
@@ -200,10 +213,19 @@ init()
  
 # Definimos algunos colores
 
+##Variable global para controlar lógica de la matriz en cualquier lugar
+#global controller
+#controller = Controller()
+
 #NEGRO = (0, 0, 0)
 #BLANCO = (255, 255, 255)
 #AZUL = ( 0, 255, 255)
 #ROJO = (255, 0, 0)
+#SILVER = (192,192,192)
+#MAROON = (128,0,0)
+#AQUA = (0,255,255) 
+#YELLOW = (255,255,0)
+
  
 # Establecemos el LARGO y ALTO de cada celda de la retícula.
 
@@ -226,12 +248,12 @@ init()
     #for columna in range(10):
         #grid[fila].append(0) # Añade una celda
 
-#grid2 = makeMat(25)
+#grid2 = controller.makeMat(25)
 
  
 # Establecemos la fila 1, celda 5 a uno. (Recuerda, los números de las filas y
 # columnas empiezan en cero.)
-#grid2[1][5] = 1
+#grid2[1][5] = 0
  
 # Inicializamos pygame
 #pygame.init()
@@ -250,6 +272,7 @@ init()
 #reloj = pygame.time.Clock()
  
 # -------- Bucle Principal del Programa-----------
+#cont = 0
 #while not hecho:
     #for evento in pygame.event.get(): 
         #if evento.type == pygame.QUIT: 
@@ -261,18 +284,28 @@ init()
             #columna = pos[0] // (LARGO + MARGEN)
             #fila = pos[1] // (ALTO + MARGEN)
             # Establece esa ubicación a cero
-            #grid2[fila][columna] = 1
+            #grid2[fila][columna] = cont
+            #cont+=1
+            #if cont > 3:
+                #cont = 0
+            
             #print("Click ", pos, "Coordenadas de la retícula: ", fila, columna)
  
     # Establecemos el fondo de pantalla.
     #pantalla.fill(NEGRO)
  
     # Dibujamos la retícula
-    #for fila in range(10):
-       # for columna in range(10):
+    #for fila in range(25):
+       # for columna in range(25):
             #color = BLANCO
-            #if grid2[fila][columna] == 1:
-                #color = AZUL
+            #if grid2[fila][columna] == 0:
+                #color = SILVER
+            #elif grid2[fila][columna] == 1:
+                #color = MAROON
+            #elif grid2[fila][columna] == 2:
+                #color = AQUA
+            #elif grid2[fila][columna] == 3:
+                #color = YELLOW
             #pygame.draw.rect(pantalla,
                              #color,
                             # [(MARGEN+LARGO) * columna + MARGEN,
