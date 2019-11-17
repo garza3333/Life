@@ -155,6 +155,30 @@ class Controller:
                 lista = self.check(matriz,i,j)
                 matriz = self.transform(matriz,lista,i,j)
         return matriz
+    def newTurn(self,matriz):
+
+        c3 = len(matriz)-1
+        for i in range(len(matriz)):
+            c1 = 0 + i
+            c2 = 0 + i
+            for j in range(c3):
+                lista = self.check(matriz,c1,c2+j)
+                matriz = self.transform(matriz,lista,c1,c2+j)
+                
+            for k in range(c3-2):
+                lista = self.check(matriz,c1+j+1,c2+c3)
+                matriz = self.transform(matriz,lista,c1+j+1,c2+c3)
+                
+            for jj in range(c3):
+                lista = self.check(matriz,c1+c3,c2+jj)
+                matriz = self.transform(matriz,lista,c1+c3,c2+jj)
+            for kk in range(c3-2):
+                lista = self.check(matriz,c1+kk+1,c2)
+                matriz = self.transform(matriz,lista,c1+kk+1,c2)
+                
+            c3 -= 2
+            
+        return matriz
 
 
 
@@ -320,7 +344,7 @@ while not hecho:
                 print("Play")
             elif cursor1.colliderect(buttonNext.rect):
                  print("Next")
-                 grid2 = controllerA.turn(grid2)
+                 grid2 = controllerA.newTurn(grid2)
                  
             elif cursor1.colliderect(buttonReload.rect):
                 
