@@ -139,6 +139,9 @@ class Controller:
         elif m[x][y] == 2:
             if self.getNum(1,lista) >= 6:
                 m[x][y] = 0
+        elif m[x][y] == 3:
+            if self.getNum(1,lista) >= 6:
+                m[x][y] = 0
         elif m[x][y] == 1:
             if self.getNum(2,lista) == 0 or self.getNum(3,lista) == 0:
                 m[x][y] = 0
