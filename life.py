@@ -277,7 +277,7 @@ class InputBox:
                         
                 
                     self.text = ''
-                    print(timeVar)
+                    
                 elif event.key == pygame.K_BACKSPACE:
                     self.text = self.text[:-1]
                 else:
@@ -403,8 +403,9 @@ while not hecho:
                 playFlag = not playFlag
                 if playFlag:
                     buttonPlay = Button(pause,pause2,680,150)
-                    pygame.mixer.music.load("sounds/clock.mp3")
-                    pygame.mixer.music.play(0)
+                    if timeVar != 0:
+                        pygame.mixer.music.load("sounds/clock.mp3")
+                        pygame.mixer.music.play(0)
                 else:
                     buttonPlay = Button(play,play2,680,150)
                     pygame.mixer.music.stop()
@@ -436,7 +437,10 @@ while not hecho:
                 cont = 0
             
 
-    
+    if timeVar <= 0:
+        pygame.mixer.music.stop()
+        buttonPlay = Button(play,play2,680,150)
+        
     cursor1.update()
     #Animacion del texbox
 
