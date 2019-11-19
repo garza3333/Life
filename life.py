@@ -242,7 +242,8 @@ COLOR_ACTIVE = pygame.Color('dodgerblue2')
 FONT = pygame.font.Font(None, 32)
 
 #Clase de texbox para entrada de texto
-
+global playFlag
+playFlag = False
 class InputBox:
 
     def __init__(self, x, y, w, h, text=''):
@@ -267,12 +268,13 @@ class InputBox:
             if self.active:
                 if event.key == pygame.K_RETURN:
                     global timeVar
-                    print(self.text)
+                    global playFlag
                     
                     if controllerA.verifyIN(self.text):
                         timeVar = int(self.text)
-                    else:
-                        print("Eso no es un nùmero")
+                        if playFlag == 1:
+                            playFlag = not playFlag
+                        
                 
                     self.text = ''
                     print(timeVar)
@@ -302,7 +304,7 @@ hecho = False
  
 # Lo usamos para establecer cuán rápido de refresca la pantalla.
 clock = pygame.time.Clock()
-
+pygame.time.set_timer(pygame.USEREVENT, 1000) 
 entry1 = InputBox(650, 350, 10, 32)
 
 # -------- Bucle Principal del Programa-----------
@@ -345,10 +347,6 @@ buttonReload = Button(reload,reload,680,250)
 
 cursor1 = Cursor()
 
-# Class texbox
-validChars = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./"
-shiftChars = '~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?'
-
 
 
 while not hecho:
@@ -356,8 +354,17 @@ while not hecho:
     
 
     for event in pygame.event.get():
-
+        
         entry1.handle_event(event)
+        
+        if event.type == pygame.USEREVENT and playFlag:
+            if timeVar > 0:
+                timeVar -= 1
+                controllerA.turn(grid2)
+            elif timeVar <= 0:
+                timeVar = 0
+                
+          
         if event.type == pygame.QUIT: 
             hecho = True
 
@@ -371,15 +378,22 @@ while not hecho:
                 controllerA.saveToDisk(grid2)
             
             
-                
+            #PREVIOUS BUTTON
             elif cursor1.colliderect(buttonPrevious.rect):
-                print("Previous")
+                print("")
+            #PLAY BUTTON
             elif cursor1.colliderect(buttonPlay.rect):
-                print("Play")
+
+                playFlag = not playFlag
+                if playFlag:
+                    buttonPlay = Button(pause,pause2,680,150)
+                else:
+                    buttonPlay = Button(play,play2,680,150)
+            #NEXT BUTTON
             elif cursor1.colliderect(buttonNext.rect):
-                 print("Next")
-                 grid2 = controllerA.turn(grid2)
                  
+                 grid2 = controllerA.turn(grid2)
+            #BACK BUTTON     
             elif cursor1.colliderect(buttonReload.rect):
                 newGrid = controllerA.makeMat(25)
                 controllerA.saveToDisk(newGrid)
