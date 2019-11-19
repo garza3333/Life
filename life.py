@@ -98,6 +98,7 @@ class Controller:
         lista = []
         if not x-1 <0:
             lista += [m[x-1][y]]
+
         if not x+1 > len(m)-1:
             lista += [m[x+1][y]]
         if not y-1 < 0 :
@@ -123,6 +124,12 @@ class Controller:
             if i == num:
                 cont+=1
         return cont
+    def verifyIN(self,entry):
+        numeros = "1234567890"
+        for i in entry:
+            if i not in numeros:
+                return False
+        return True
 
     ##Funcion que comprueba si una condicion se cumple
     ##para intercambiar el valor de la casilla de la matriz
@@ -159,20 +166,6 @@ class Controller:
 
 
 
-#print(check(matriz,0,0))
-#print(getNum(1,check(matriz,0,0)))
-#lista = [0,1,2,3,1,2,0,1,2,0,0,1,2,3]
-#print(getNum(1,lista))
-#turn(matriz)
-
-#controller = Controller()
-#controller.saveToDisk(controller.turn(matriz))
-#controller.init()
-#controller.saveToDisk(controller.turn(matriz))
-#controller.init()
-#controller.saveToDisk(controller.turn(matriz))
-#controller.init()
-
 
 
 ##Clase Mouse
@@ -192,18 +185,13 @@ class Button(pygame.sprite.Sprite):
         self.rect = self.image_a.get_rect()
         self.rect.left,self.rect.top = (x,y)
     def update(self,window,cursor):
+        
         if cursor.colliderect(self.rect):
             self.image_a = self.image_s
         else:
             self.image_a = self.image_n
 
         window.blit(self.image_a , self.rect)
-
-        
-        
-
-
-
 
 
  
@@ -222,6 +210,7 @@ MAROON = (128,0,0)
 AQUA = (0,255,255) 
 YELLOW = (255,255,0)
 
+
  
 # Establecemos el LARGO y ALTO de cada celda de la retícula.
 
@@ -231,18 +220,10 @@ ALTO = 20
 # Establecemos el margen entre las celdas.
 
 MARGEN = 5
- 
-# Creamos un array bidimensional. Un array bidimensional
-# no es más que una lista de listas.
-#grid = []
-#for fila in range(10):
 
-    # Añadimos un array vacío que contendrá cada celda 
-    # en esta fila
-    
-    #grid.append([])
-    #for columna in range(10):
-        #grid[fila].append(0) # Añade una celda
+
+#Creando matriz logica
+
 global grid2
 grid2 = controllerA.init()
 
@@ -250,10 +231,68 @@ grid2 = controllerA.init()
  
 # Inicializamos pygame
 pygame.init()
-  
+
+
 # Establecemos el LARGO y ALTO de la pantalla
 DIMENSION_VENTANA = [800, 640]
 window = pygame.display.set_mode(DIMENSION_VENTANA)
+
+COLOR_INACTIVE = pygame.Color('lightskyblue3')
+COLOR_ACTIVE = pygame.Color('dodgerblue2')
+FONT = pygame.font.Font(None, 32)
+
+#Clase de texbox para entrada de texto
+
+class InputBox:
+
+    def __init__(self, x, y, w, h, text=''):
+        self.rect = pygame.Rect(x, y, w, h)
+        self.color = COLOR_INACTIVE
+        self.text = text
+        self.txt_surface = FONT.render(text, True, self.color)
+        self.active = False
+
+    def handle_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            # If the user clicked on the input_box rect.
+            if self.rect.collidepoint(event.pos):
+                # Toggle the active variable.
+                self.active = not self.active
+            else:
+                self.active = False
+            # Change the current color of the input box.
+            self.color = COLOR_ACTIVE if self.active else COLOR_INACTIVE
+        if event.type == pygame.KEYDOWN:
+        
+            if self.active:
+                if event.key == pygame.K_RETURN:
+                    global timeVar
+                    print(self.text)
+                    
+                    if controllerA.verifyIN(self.text):
+                        timeVar = int(self.text)
+                    else:
+                        print("Eso no es un nùmero")
+                
+                    self.text = ''
+                    print(timeVar)
+                elif event.key == pygame.K_BACKSPACE:
+                    self.text = self.text[:-1]
+                else:
+                    self.text += event.unicode
+                # Re-render the text.
+                self.txt_surface = FONT.render(self.text, True, self.color)
+
+    def update(self):
+        # Resize the box if the text is too long.
+        width = max(200, self.txt_surface.get_width()+10)
+        self.rect.w = width
+
+    def draw(self, screen):
+        # Blit the text.
+        screen.blit(self.txt_surface, (self.rect.x+5, self.rect.y+5))
+        # Blit the rect.
+        pygame.draw.rect(screen, self.color, self.rect, 2)
  
 # Establecemos el título de la pantalla.
 pygame.display.set_caption("Life")
@@ -262,8 +301,10 @@ pygame.display.set_caption("Life")
 hecho = False
  
 # Lo usamos para establecer cuán rápido de refresca la pantalla.
-reloj = pygame.time.Clock()
- 
+clock = pygame.time.Clock()
+
+entry1 = InputBox(650, 350, 10, 32)
+
 # -------- Bucle Principal del Programa-----------
 
 # Fuente del texto + label
@@ -304,15 +345,32 @@ buttonReload = Button(reload,reload,680,250)
 
 cursor1 = Cursor()
 
+# Class texbox
+validChars = "`1234567890-=qwertyuiop[]\\asdfghjkl;'zxcvbnm,./"
+shiftChars = '~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>?'
+
+
+
 while not hecho:
+  
     
-    for evento in pygame.event.get(): 
-        if evento.type == pygame.QUIT: 
+
+    for event in pygame.event.get():
+
+        entry1.handle_event(event)
+        if event.type == pygame.QUIT: 
             hecho = True
-        elif evento.type == pygame.MOUSEBUTTONDOWN:
+
+
+            
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            
+            
             if cursor1.colliderect(buttonSave.rect):
                 controllerA.printMat(grid2)
                 controllerA.saveToDisk(grid2)
+            
+            
                 
             elif cursor1.colliderect(buttonPrevious.rect):
                 print("Previous")
@@ -323,11 +381,10 @@ while not hecho:
                  grid2 = controllerA.turn(grid2)
                  
             elif cursor1.colliderect(buttonReload.rect):
-                
                 newGrid = controllerA.makeMat(25)
                 controllerA.saveToDisk(newGrid)
                 grid2 = controllerA.init()
-                
+        
              #El usuario presiona el ratón. Obtiene su posición.
             pos = pygame.mouse.get_pos()
             # Cambia las coordenadas x/y de la pantalla por coordenadas reticulares
@@ -341,10 +398,16 @@ while not hecho:
             if cont > 3:
                 cont = 0
             
-            #print("Click ", pos, "Coordenadas de la retícula: ", fila, columna)
-            
+
+    
     cursor1.update()
+    #Animacion del texbox
+
+    
+    entry1.update()
     window.fill(NEGRO)
+    entry1.draw(window)
+    
     buttonSave.update(window,cursor1)
     buttonPlay.update(window,cursor1)
     buttonNext.update(window,cursor1)
@@ -380,19 +443,14 @@ while not hecho:
                              (MARGEN+ALTO) * fila + MARGEN,
                               LARGO,
                              ALTO])
-            
-          #  pygame.Surface.blit(image, window,  [(MARGEN+LARGO) * columna + MARGEN,
-             #                 (MARGEN+ALTO) * fila + MARGEN,
-                #              LARGO,
-                   #           ALTO])
+
      
     # Limitamos a 60 fotogramas por segundo.
-    reloj.tick(60)
+    clock.tick(60)
  
-    # Avanzamos y actualizamos la pantalla con lo que hemos dibujado.
+    # Actualizar pantalla
     pygame.display.flip()
-     
-# Pórtate bien con el IDLE.
+
 pygame.quit()
 
 
