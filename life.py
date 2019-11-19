@@ -311,6 +311,7 @@ entry1 = InputBox(650, 350, 10, 32)
 
 # Fuente del texto + label
 myfont = pygame.font.SysFont("monospace", 15)
+myfont2 = pygame.font.SysFont("monospace", 15)
 
 #Color de las casillas
 cont = 0
@@ -337,6 +338,10 @@ house = pygame.image.load("images/casa.png")
 water = pygame.image.load("images/agua.png")
 light = pygame.image.load("images/luz.png")
 
+#Sonidos
+#pygame.mixer.music.load("sounds/clock.mp3")
+
+
 # Botones
 buttonSave = Button(save1,save2,680,50)
 
@@ -347,7 +352,8 @@ buttonReload = Button(reload,reload,680,250)
 
 cursor1 = Cursor()
 
-
+savedFlag = False
+timeSave = 1
 
 while not hecho:
   
@@ -363,7 +369,12 @@ while not hecho:
                 controllerA.turn(grid2)
             elif timeVar <= 0:
                 timeVar = 0
-                
+        if event.type == pygame.USEREVENT and savedFlag:
+            if timeSave > 0:
+                timeSave -= 1
+            else:
+                timeSave = 1
+                savedFlag = False
           
         if event.type == pygame.QUIT: 
             hecho = True
@@ -372,14 +383,19 @@ while not hecho:
             
         elif event.type == pygame.MOUSEBUTTONDOWN:
             
-            
+
+            #SAVE BUTTON
             if cursor1.colliderect(buttonSave.rect):
+
                 controllerA.printMat(grid2)
                 controllerA.saveToDisk(grid2)
+                savedFlag = True
+
             
             
             #PREVIOUS BUTTON
             elif cursor1.colliderect(buttonPrevious.rect):
+
                 print("")
             #PLAY BUTTON
             elif cursor1.colliderect(buttonPlay.rect):
@@ -387,17 +403,24 @@ while not hecho:
                 playFlag = not playFlag
                 if playFlag:
                     buttonPlay = Button(pause,pause2,680,150)
+                    pygame.mixer.music.load("sounds/clock.mp3")
+                    pygame.mixer.music.play(0)
                 else:
                     buttonPlay = Button(play,play2,680,150)
+                    pygame.mixer.music.stop()
+
             #NEXT BUTTON
             elif cursor1.colliderect(buttonNext.rect):
+
                  
                  grid2 = controllerA.turn(grid2)
-            #BACK BUTTON     
+            #RELOAD BUTTON     
             elif cursor1.colliderect(buttonReload.rect):
+
                 newGrid = controllerA.makeMat(25)
-                controllerA.saveToDisk(newGrid)
-                grid2 = controllerA.init()
+                grid2 = newGrid
+                #controllerA.saveToDisk(newGrid) Se podria guardar en disco
+                #grid2 = controllerA.init()
         
              #El usuario presiona el ratón. Obtiene su posición.
             pos = pygame.mouse.get_pos()
@@ -428,7 +451,10 @@ while not hecho:
     buttonPrevious.update(window,cursor1)
     buttonReload.update(window,cursor1)
     label = myfont.render("  Time: " +  str(timeVar), 1, (255,255,0))
+    label2 = myfont2.render("¡ Saved !",1,(255,255,0))
     window.blit(label, (655, 20))
+    if savedFlag:
+        window.blit(label2,(670,110))
 
  
     # Establecemos el fondo de pantalla.
