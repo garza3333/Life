@@ -139,7 +139,7 @@ class Controller:
                 m[x][y] = 1
             elif  self.getNum(1,lista) >= 2 and self.getNum(3,lista) >= 1:
                 m[x][y] = 2
-            elif  self.getNum(1,lista)>= 3 or self.getNum(2,lista)>=3 or self.getNum(3,lista)>=3:
+            elif  self.getNum(1,lista)>= 3 or self.getNum(2,lista)>=3 or self.getNum(3,lista)>=3 or  self.getNum(1,lista)+self.getNum(2,lista)+self.getNum(3,lista) >= 3:
                 m[x][y] = 3
 
 
@@ -175,8 +175,10 @@ class Cursor(pygame.Rect):
         pygame.Rect.__init__(self,0,0,1,1)
     def update(self):
         self.left,self.top = pygame.mouse.get_pos()
+        
 
-
+#Clase Boton
+        
 class Button(pygame.sprite.Sprite):
     def __init__(self,image1,image2,x=100,y=100):
         self.image_n = image1
@@ -234,8 +236,8 @@ pygame.init()
 
 
 # Establecemos el LARGO y ALTO de la pantalla
-DIMENSION_VENTANA = [800, 640]
-window = pygame.display.set_mode(DIMENSION_VENTANA)
+
+window = pygame.display.set_mode([860, 640])
 
 COLOR_INACTIVE = pygame.Color('lightskyblue3')
 COLOR_ACTIVE = pygame.Color('dodgerblue2')
@@ -246,7 +248,7 @@ global playFlag
 playFlag = False
 class InputBox:
 
-    def __init__(self, x, y, w, h, text=''):
+    def __init__(self, x, y, w, h, text=""):
         self.rect = pygame.Rect(x, y, w, h)
         self.color = COLOR_INACTIVE
         self.text = text
@@ -259,6 +261,7 @@ class InputBox:
             if self.rect.collidepoint(event.pos):
                 # Toggle the active variable.
                 self.active = not self.active
+                
             else:
                 self.active = False
             # Change the current color of the input box.
@@ -313,6 +316,14 @@ entry1 = InputBox(650, 350, 10, 32)
 myfont = pygame.font.SysFont("monospace", 15)
 myfont2 = pygame.font.SysFont("monospace", 15)
 
+#Simbologia
+myfont3 = pygame.font.SysFont("monospace", 15)
+myfont4 = pygame.font.SysFont("monospace", 15)
+myfont5 = pygame.font.SysFont("monospace", 15)
+myfont6 = pygame.font.SysFont("monospace", 15)
+
+myfont7 = pygame.font.SysFont("monospace", 15)
+
 #Color de las casillas
 cont = 0
 #variable de tiempo luego debe ser cambiada por el input
@@ -343,12 +354,12 @@ light = pygame.image.load("images/luz.png")
 
 
 # Botones
-buttonSave = Button(save1,save2,680,50)
+buttonSave = Button(save1,save2,720,50)
 
-buttonPrevious = Button(previous,previous2,630,150)
-buttonPlay = Button(play,play2,680,150)
-buttonNext = Button(nexxt,nexxt2,725,150)
-buttonReload = Button(reload,reload,680,250)
+buttonPrevious = Button(previous,previous2,670,150)
+buttonPlay = Button(play,play2,720,150)
+buttonNext = Button(nexxt,nexxt2,765,150)
+buttonReload = Button(reload,reload,720,250)
 
 cursor1 = Cursor()
 
@@ -387,7 +398,7 @@ while not hecho:
             #SAVE BUTTON
             if cursor1.colliderect(buttonSave.rect):
 
-                controllerA.printMat(grid2)
+                #controllerA.printMat(grid2)
                 controllerA.saveToDisk(grid2)
                 savedFlag = True
 
@@ -402,12 +413,12 @@ while not hecho:
 
                 playFlag = not playFlag
                 if playFlag:
-                    buttonPlay = Button(pause,pause2,680,150)
+                    buttonPlay = Button(pause,pause2,720,150)
                     if timeVar != 0:
                         pygame.mixer.music.load("sounds/clock.mp3")
                         pygame.mixer.music.play(0)
                 else:
-                    buttonPlay = Button(play,play2,680,150)
+                    buttonPlay = Button(play,play2,720,150)
                     pygame.mixer.music.stop()
 
             #NEXT BUTTON
@@ -439,7 +450,7 @@ while not hecho:
 
     if timeVar <= 0:
         pygame.mixer.music.stop()
-        buttonPlay = Button(play,play2,680,150)
+        buttonPlay = Button(play,play2,720,150)
         
     cursor1.update()
     #Animacion del texbox
@@ -456,13 +467,35 @@ while not hecho:
     buttonReload.update(window,cursor1)
     label = myfont.render("  Time: " +  str(timeVar), 1, (255,255,0))
     label2 = myfont2.render("¡ Saved !",1,(255,255,0))
-    window.blit(label, (655, 20))
+
+    label3 = myfont3.render("Lote Baldio",1,SILVER)
+    label4 = myfont4.render("Fuente de Agua",1,AZUL)
+    label5 = myfont5.render("Casa",1,MAROON)
+    label6 = myfont6.render("Fuente de Luz",1,YELLOW)
+
+    label7 = myfont6.render("Ingrese el tiempo",1,AZUL)
+
+    
+
+
+    window.blit(label3, (675 ,425))
+    window.blit(label4, (675, 475))
+    window.blit(label5, (675, 525))
+    window.blit(label6, (675, 575))
+    
+    window.blit(label7, (675, 330))
+    
+    window.blit(label, (695, 20))
+    
     if savedFlag:
-        window.blit(label2,(670,110))
+        window.blit(label2,(710,110))
 
  
     # Establecemos el fondo de pantalla.
-    
+    pygame.draw.rect(window,SILVER,[650,425,20,20])
+    pygame.draw.rect(window,AZUL,[650,475,20,20])
+    pygame.draw.rect(window,MAROON,[650,525,20,20])
+    pygame.draw.rect(window,YELLOW,[650,575,20,20])
  
     # Dibujamos la retícula
     for fila in range(25):
@@ -487,6 +520,7 @@ while not hecho:
                              (MARGEN+ALTO) * fila + MARGEN,
                               LARGO,
                              ALTO])
+        
 
      
     # Limitamos a 60 fotogramas por segundo.
